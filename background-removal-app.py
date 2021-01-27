@@ -30,7 +30,15 @@ def threshold_pred(pred, thresh_low=0, thresh_high=0.2):
 def about():
 	st.write(
 		'''
-		I built this app training a U-net. Here are the results.
+		In this project I wanted to build an algorithm that could automatically remove the background from a selfie. For that, I used the U-net 
+		architecture and the AISegment.com Matting Human dataset, which consists of approximately 
+		34 thousand pictures of mid-upper body selfies, with only one person in each picture, relatively near from the camera and with a high contrast with the background.
+		
+		Please take into account that the model was trained on mid-upper body selfies, with only one person in the picture,
+		relatively near from the camera and with a high contrast with the background.
+		
+		If you want to see how I did it, [here](https://github.com/javiergarciamolina/selfie-background-removal) is the repo.
+				
 		''')
 
 
