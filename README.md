@@ -14,7 +14,7 @@ In this project I wanted to build an algorithm that could automatically remove t
 
 ## Result:
 
-**The model achieved an Intersection over Union of 0.994 on the test set.**
+**The model achieved an average Intersection over Union of 0.994 on the test set.**
 
 Let's see some examples of test images plotted against their ground-truth (or at least the one provided in the dataset) and their predictions:
 
