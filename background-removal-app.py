@@ -45,7 +45,7 @@ def main():
     st.write("**Please note that it will work best with selfies, ideally with only one person in the picture,  relatively near from the camera and with a high contrast with the background.**")
     st.write("Here's an example of the kind of pictures with wich it works best:")
 	
-    selfie_mine = load_img("selfie-background-removal/images/selfie_mine.jpeg")
+    selfie_mine = load_img("/images/selfie_mine.jpeg")
     selfie_mine = array_to_img(selfie_mine)
     st.image(selfie_mine)
 	
