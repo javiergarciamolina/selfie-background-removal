@@ -6,6 +6,8 @@ You can try it at:
 
 https://share.streamlit.io/javiergarciamolina/selfie-background-removal/main/background-removal-app.py
 
+Please take into account that the model was trained on mid-upper body selfies, with only one person in the picture, relatively near from the camera and with a high contrast with the background.
+
 ## Objective:
 
 In this project I wanted to build an algorithm that could automatically remove the background from a selfie. For that, I used the U-net architecture and the AISegment.com Matting Human dataset, which consists of approximately 34 thousand pictures of mid-upper body selfies, with only one person in each picture, relatively near from the camera and with a high contrast with the background.
@@ -17,6 +19,13 @@ In this project I wanted to build an algorithm that could automatically remove t
 Let's see some examples of test images plotted against their ground-truth (or at least the one provided in the dataset) and their predictions:
 
 ![descarga (1)](https://user-images.githubusercontent.com/70718425/105999038-857b6f80-60ad-11eb-9bb1-f5fdf189d9bc.png)
+
+**How could we improve this algorithm?**
+
+
+* Getting more and better labelled data.
+* Getting different kinds of photos (not only mid-upper body selfies).
+* After getting more data, training more complex models and using ensemble-learning.
 
 ## Main technologies used:
 
