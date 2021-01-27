@@ -42,7 +42,7 @@ def main():
 
   if choice == "App":
 	
-    st.write("**Please note that it will work best with selfies, ideally with only one person in the picture,  relatively near from the camera and with a high contrast with the background.**")
+    st.write("**Please note that it will work best with mid-upper body selfies, ideally with only one person in the picture,  relatively near from the camera and with a high contrast with the background.**")
     st.write("Here's an example of the kind of pictures with wich it works best:")
 	
     selfie_mine = load_img("images/selfie_mine.jpeg", target_size=(224,224,3))
