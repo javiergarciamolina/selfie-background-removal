@@ -67,7 +67,7 @@ def main():
       # result_img is the image with rectangle drawn on it (in case there are faces detected)
       # result_faces is the array with co-ordinates of bounding box(es)
       pred = unet.predict(image)[0]
-      pred = threshold_pred(pred)
+     # pred = threshold_pred(pred)
       
       #image = img_to_array(image)
       mask = 1-((1-image)*pred)
