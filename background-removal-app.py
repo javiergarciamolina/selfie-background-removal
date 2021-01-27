@@ -45,7 +45,7 @@ def main():
     st.write("**Please note that it will work best with selfies, ideally with only one person in the picture,  relatively near from the camera and with a high contrast with the background.**")
     st.write("Here's an example of the kind of pictures with wich it works best:")
 	
-    selfie_mine = Image.open("/images/selfie_mine.jpeg")
+    selfie_mine = Image.open("selfie-background-removal/images/selfie_mine.jpeg")
     st.image(selfie_mine)
 	
     st.write("You can go to the About section from the sidebar to learn more about it.")
