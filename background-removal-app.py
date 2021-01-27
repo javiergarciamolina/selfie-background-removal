@@ -44,7 +44,7 @@ def main():
     selfie_mine = array_to_img(selfie_mine)
     st.image(selfie_mine)
 	
-    st.write("You can go to the About section from the sidebar to learn more about it.")
+    st.write("You can go to the About section from the sidebar to learn more about it, or click [here](https://github.com/javiergarciamolina/selfie-background-removal) to see the repository.")
             
     # You can specify more file types below if you want
     image_file = st.file_uploader("Upload selfie", type=['jpeg', 'png', 'jpg', 'webp'])
