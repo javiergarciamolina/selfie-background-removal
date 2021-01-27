@@ -12,21 +12,6 @@ from tensorflow.keras.preprocessing.image import img_to_array, array_to_img, loa
 
 unet = load_model("trained_unet.h5")
 
-def threshold_pred(pred, thresh_low=0, thresh_high=0.2):
-  thresh_pred = np.zeros(pred.shape)
-  for i in range(pred.shape[0]):
-    for j in range(pred.shape[1]):
-      if pred[i,j] < thresh_low:
-        thresh_pred[i,j] = 0
-
-      elif pred[i,j] > thresh_high:
-        thresh_pred[i,j] = 1
-
-      else:
-        thresh_pred[i,j] = pred[i,j]
-
-  return thresh_pred
-
 def about():
 	st.write(
 		'''
@@ -39,7 +24,7 @@ def about():
 		Please take into account that the model was trained on mid-upper body selfies, with only one person in the picture,
 		relatively near from the camera and with a high contrast with the background.
 		
-		If you want to see how I did it, [here](https://github.com/javiergarciamolina/selfie-background-removal) is the repo.
+		**If you want to see how I did it, [here](https://github.com/javiergarciamolina/selfie-background-removal) is the repo.**
 				
 		''')
 
