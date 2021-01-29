@@ -43,7 +43,7 @@ Let's see some examples of test images plotted against their ground-truth (or at
 
 ## Sources:
 
-I used article which describes the U-net architecture, it can be found here: https://arxiv.org/abs/1505.04597
+I used the article that describes the U-net architecture, it can be found here: https://arxiv.org/abs/1505.04597
 
 ## Model:
 
