@@ -1,4 +1,3 @@
-# Importing required libraries, obviously
 import streamlit as st
 from PIL import Image
 import numpy as np
@@ -6,11 +5,83 @@ import os
 import tensorflow as tf
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.image import img_to_array, array_to_img, load_img
+from tensorflow.keras.layers import *
+from tensorflow.keras import backend as K
+from tensorflow.keras import Model
 
 
-# Loading pre-trained parameters for the cascade classifier
 
-unet = load_model("trained_unet.h5")
+chan_dim = -1
+
+if K.image_data_format() == "channels_first":
+  input_shape = (depth, height, width)
+  chan_dim = 1
+
+class Unet:
+  @staticmethod
+
+  def conv_module(x, K):
+    x = Conv2D(K, (3,3), padding="same", activation="relu")(x)
+    x = BatchNormalization(axis=chan_dim)(x)
+    x = Conv2D(K, (3,3), padding="same", activation="relu")(x)
+    x = BatchNormalization(axis=chan_dim)(x)
+
+    return x
+  
+  def conv_upconv_module(x, K):
+    x = Conv2D(K, (3,3), padding="same", activation="relu")(x)
+    x = BatchNormalization(axis=chan_dim)(x)
+    x = Conv2D(K, (3,3), padding="same", activation="relu")(x)
+    x = BatchNormalization(axis=chan_dim)(x)
+    x = Dropout(0.2)(x)
+    x = Conv2DTranspose(K/2, (2,2), strides=(2, 2), padding='same')(x)
+
+    return x
+
+  def build(input_shape):
+
+    input = Input(shape=input_shape)
+
+    c1 = BatchNormalization(axis=chan_dim)(input)
+    c1 = Unet.conv_module(c1, 16)
+    p1 = MaxPooling2D(pool_size=(2,2))(c1)
+    p1 = Dropout(0.2)(p1)
+    
+    c2 = Unet.conv_module(p1, 32)
+    p2 = MaxPooling2D(pool_size=(2,2))(c2)
+    p2 = Dropout(0.2)(p2)
+
+    c3 = Unet.conv_module(p2, 64)
+    p3 = MaxPooling2D(pool_size=(2,2))(c3)
+    p3 = Dropout(0.2)(p3)
+
+    c4 = Unet.conv_module(p3, 128)
+    p4 = MaxPooling2D(pool_size=(2,2))(c4)
+    p4 = Dropout(0.2)(p4)
+
+    u6 = Unet.conv_upconv_module(p4, 256)
+    u6 = concatenate([u6, c4], axis=chan_dim)
+
+    u7 = Unet.conv_upconv_module(u6, 128)
+    u7 = concatenate([u7, c3], axis=chan_dim)
+
+    u8 = Unet.conv_upconv_module(u7, 64)
+    u8 = concatenate([u8, c2], axis=chan_dim)
+
+    u9 = Unet.conv_upconv_module(u8, 32)
+    u9 = concatenate([u9, c1], axis=chan_dim)
+
+    c9 = Conv2D(16, (3,3), padding="same", activation="relu")(u9)
+    c9 = BatchNormalization(axis=chan_dim)(c9)
+    c9 = Conv2D(16, (3,3), padding="same", activation="relu")(c9)
+    c9 = BatchNormalization(axis=chan_dim)(c9)
+    c9 = Dropout(0.2)(c9)
+    output = Conv2D(1, (1, 1), padding="same", activation='sigmoid')(c9)
+
+    model = Model(inputs=input, outputs=output)
+
+    return model
+
 
 def about():
 	st.write(
@@ -28,6 +99,8 @@ def about():
 				
 		''')
 
+unet = Unet.build((224,224,3))
+unet.load_weights('unet_weights.h5')
 
 def main():
   st.title("Selfie Background Removal")
@@ -46,7 +119,6 @@ def main():
 	
     st.write("You can go to the About section from the sidebar to learn more about it, or click [here](https://github.com/javiergarciamolina/selfie-background-removal) to see the repository.")
             
-    # You can specify more file types below if you want
     image_file = st.file_uploader("Upload selfie", type=['jpeg', 'png', 'jpg', 'webp'])
 
     if image_file is not None:
@@ -59,14 +131,12 @@ def main():
 	
     if st.button("Process"):
                     
-      # result_img is the image with rectangle drawn on it (in case there are faces detected)
-      # result_faces is the array with co-ordinates of bounding box(es)
+      
       pred = unet.predict(image)[0]
       
       mask = 1-((1-image)*pred)
       mask = array_to_img(mask[0])
       st.image(mask)
-	       #,use_column_width=True)
 
   elif choice == "About":
     about()
