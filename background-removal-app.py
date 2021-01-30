@@ -126,6 +126,9 @@ def main():
       image = Image.open(image_file)
       array_im = np.array(image)
       orig_shape = array_im.shape
+      ratio = orig_shape[0] / 224
+      final_shape = (224, orig_shape[1]*ratio)
+
       image = image.resize((224,224))
    
       image = np.array(image) / 255
@@ -138,7 +141,7 @@ def main():
       
       mask = 1-((1-image)*pred)
       mask = array_to_img(mask[0])
-      mask = mask.resize(orig_shape[:2])
+      mask = mask.resize(final_shape)
       st.image(mask)
 
   elif choice == "About":
