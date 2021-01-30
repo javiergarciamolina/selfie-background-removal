@@ -142,6 +142,7 @@ def main():
       mask = 1-((1-image)*pred)
       mask = array_to_img(mask[0])
       mask = mask.resize(final_shape)
+      mask = array_to_img(mask)
       st.image(mask)
 
   elif choice == "About":
