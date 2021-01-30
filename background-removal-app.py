@@ -124,7 +124,8 @@ def main():
     if image_file is not None:
 
       image = Image.open(image_file)
-      orig_shape = image.shape
+      array_im = np.array(image)
+      orig_shape = array_im.shape
       image = image.resize((224,224))
    
       image = np.array(image) / 255
