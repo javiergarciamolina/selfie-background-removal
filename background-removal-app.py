@@ -124,7 +124,7 @@ def main():
     selfie_mine = load_img("images/selfie_mine.jpeg", target_size=(224,224,3))
     my_selfie_final_shape = get_final_shape(selfie_mine)
     selfie_mine = array_to_img(selfie_mine)
-    selfie_mine = selfie_mine.reshape(my_selfie_image_final_shape)
+    selfie_mine = selfie_mine.resize(my_selfie_image_final_shape)
     st.image(selfie_mine)
 	
     st.write("You can go to the About section from the sidebar to learn more about it, or click [here](https://github.com/javiergarciamolina/selfie-background-removal) to see the repository.")
