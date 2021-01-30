@@ -82,6 +82,14 @@ class Unet:
 
     return model
 
+def get_final_shape(image):
+    array_im = np.array(image)
+    orig_shape = array_im.shape
+    ratio = orig_shape[0] / 224
+    final_shape = (224, int(orig_shape[0]/ratio))
+		
+    return final_shape
+
 
 def about():
 	st.write(
@@ -124,10 +132,7 @@ def main():
     if image_file is not None:
 
       image = Image.open(image_file)
-      array_im = np.array(image)
-      orig_shape = array_im.shape
-      ratio = orig_shape[0] / 224
-      final_shape = (224, int(orig_shape[0]/ratio))
+      final_shape = get_final_shape(image)
 
       image = image.resize((224,224))
    
