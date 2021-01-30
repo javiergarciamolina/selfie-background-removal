@@ -127,7 +127,7 @@ def main():
       array_im = np.array(image)
       orig_shape = array_im.shape
       ratio = orig_shape[0] / 224
-      final_shape = (224, orig_shape[1]*ratio)
+      final_shape = (224, int(orig_shape[1]*ratio))
 
       image = image.resize((224,224))
    
