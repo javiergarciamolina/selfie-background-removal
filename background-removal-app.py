@@ -136,7 +136,7 @@ def main():
       orig_image = Image.open(image_file)
       final_shape = get_final_shape(orig_image)
 
-      image = image.resize((224,224))
+      image = orig_image.resize((224,224))
    
       image = np.array(image) / 255
       image = np.expand_dims(image, axis=0)
