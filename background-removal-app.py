@@ -147,8 +147,8 @@ def main():
       pred = unet.predict(image)[0]
       
       mask = np.zeros((final_shape[0], final_shape[1], 4))
-      mask[:,:,:2] = orig_image
-      mask[:,:,3] = pred
+      mask[:,:,:3] = orig_image
+      mask[:,:,-1] = pred
  
       st.image(mask)
 
