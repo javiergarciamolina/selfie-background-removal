@@ -145,10 +145,8 @@ def main():
                     
       pred = unet.predict(image)[0]
       
-      mask = np.zeros((224,224,4))
-      mask[:,:,:3] = image
-      mask[:,:,4] = img_to_array(pred)[0]
-      mask = array_to_img(mask)
+      mask = 1-((1-image)*pred)
+      mask = array_to_img(mask[0])
       mask = mask.resize(final_shape)
       st.image(mask)
 
