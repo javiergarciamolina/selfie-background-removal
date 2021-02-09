@@ -133,8 +133,8 @@ def main():
 
     if image_file is not None:
 
-      image = Image.open(image_file)
-      final_shape = get_final_shape(image)
+      orig_image = Image.open(image_file)
+      final_shape = get_final_shape(orig_image)
 
       image = image.resize((224,224))
    
@@ -146,9 +146,10 @@ def main():
       
       pred = unet.predict(image)[0]
       
-      mask = 1-((1-image)*pred)
-      mask = array_to_img(mask[0])
-      mask = mask.resize(final_shape)
+      mask = np.zeros((final_shape[0], final_shape[1], 4))
+      mask[:,:,:2] = orig_image
+      mask[:,:,3] = pred
+ 
       st.image(mask)
 
   elif choice == "About":
