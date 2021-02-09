@@ -147,7 +147,7 @@ def main():
       
       mask = np.zeros((224,224,4))
       mask[:,:,:3] = image
-      mask[:,:,4] = img_to_array(pred)
+      mask[:,:,4] = img_to_array(pred)[0]
       mask = array_to_img(mask)
       mask = mask.resize(final_shape)
       st.image(mask)
