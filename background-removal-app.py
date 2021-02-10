@@ -117,7 +117,7 @@ def correct_orientation(image):
     
     # otherwise, let's compute all the probabilities:
     probabilities = [correctly_oriented]
-    for i in range(1,3):
+    for i in range(1,4):
         rotated_image = np.rot90(image, i)
         probabilities.append(is_correctly_oriented(rotated_image))
         
