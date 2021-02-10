@@ -54,7 +54,7 @@ I built and tested three U-net-like architectures, **achieving an IoU of 0.994 o
 
 After deploying the web app, I saw that sometimes the server would randomly rotate the image, which lead to bad results.
 
-**So I built a deep learning model that would tell whether an image is correctly oriented, and an algorithm that would rotate it to its correct orientation otherwise.**
+**So I built a deep learning model that would tell whether an image is correctly oriented, and an algorithm that would rotate it to its correct orientation.**
 
 
 ## Visualizing some results:
