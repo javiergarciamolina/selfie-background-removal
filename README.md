@@ -17,6 +17,7 @@ Please take into account that the model was trained on mid-upper body selfies, w
 
 * Downloaded the AISegment.com Matting Human dataset, which consists of approximately 34 thousand pictures of mid-upper body selfies and their respective masks.
 * Tried a couple U-net-like architectures and selected the best, achieving a 0.994 IoU on the test set.
+* Built an algorithm that corrects the orientation of the image.
 * Built a web app using Streamlit so that anyone can use the model to remove the background from their selfies.
 
 ## Main technologies used:
@@ -48,6 +49,12 @@ Original U-net architecture:
 ![descarga (7)](https://user-images.githubusercontent.com/70718425/107150849-2694e080-6960-11eb-810e-f66ef8dc9588.png)
 
 I built and tested three U-net-like architectures, **achieving an IoU of 0.994 on the test set** with the last one.
+
+## [Correcting the orientation:](https://github.com/javiergarciamolina/selfie-background-removal/blob/main/correct_image_orientation.ipynb)
+
+After deploying the web app, I saw that sometimes the server would randomly rotate the image, which lead to bad results.
+
+**So I built a deep learning model that would tell whether an image is correctly oriented, and an algorithm that would rotate it to its correct orientation otherwise.**
 
 
 ## Visualizing some results:
