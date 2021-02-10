@@ -90,6 +90,41 @@ def get_final_shape(image):
 		
     return final_shape
 
+def is_correctly_oriented(image): 
+    
+    # returns the estimated probability that the given image has correct orientation
+    # assumes that the image has shape of (224,224,3)
+    image = img_to_array(image)
+    
+    # preprocessing function of MobileNetV2
+    preprocessed_image = mobilenet_v2.preprocess_input(image)
+    preprocessed_image = np.expand_dims(preprocessed_image, axis=0)
+    
+    correctly_oriented = mobilenetv2.predict(preprocessed_image)[0][0]
+    
+    return correctly_oriented
+
+def correct_orientation(image):
+    # returns the correct orientation of the image, assumes that the image has 
+    # shape of (224,224,3)
+    
+    correctly_oriented = is_correctly_oriented(image)
+    
+    # if it's very likely to be already correctly oriented, return 0
+    if correctly_oriented > 0.9:
+        return 0
+    
+    # otherwise, let's compute all the probabilities:
+    probabilities = [correctly_oriented]
+    for i in range(1,3):
+        rotated_image = np.rot90(image, i)
+        probabilities.append(is_correctly_oriented(rotated_image))
+        
+    n_rotations_needed = np.argmax(probabilities)
+    
+    return np.rot90(image, n_rotations_needed)
+
+
 
 def about():
 	st.write(
@@ -109,6 +144,7 @@ def about():
 
 unet = Unet.build((224,224,3))
 unet.load_weights('unet_weights.h5')
+mobilenetv2 = load_model("mobilenetv2.h5")
 
 def main():
   st.title("Selfie Background Removal")
@@ -137,6 +173,7 @@ def main():
       final_shape = get_final_shape(orig_image)
 
       image = orig_image.resize((224,224))
+      image = correct_orientation(image)
    
       image = np.array(image) / 255
       image = np.expand_dims(image, axis=0)
