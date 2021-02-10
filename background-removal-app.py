@@ -8,6 +8,7 @@ from tensorflow.keras.preprocessing.image import img_to_array, array_to_img, loa
 from tensorflow.keras.layers import *
 from tensorflow.keras import backend as K
 from tensorflow.keras import Model
+from tensorflow.keras.applications import mobilenet_v2
 
 
 
