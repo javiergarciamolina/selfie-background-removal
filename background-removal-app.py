@@ -113,7 +113,7 @@ def correct_orientation(image):
     
     # if it's very likely to be already correctly oriented, return 0
     if correctly_oriented > 0.9:
-        return 0
+        return image
     
     # otherwise, let's compute all the probabilities:
     probabilities = [correctly_oriented]
