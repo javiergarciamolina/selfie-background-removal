@@ -8,7 +8,7 @@
 
 You can try it at:
 
-https://share.streamlit.io/javiergarciamolina/selfie-background-removal/main/background-removal-app.py
+https://share.streamlit.io/javiergarciamolina/selfie-background-removal-app/main/app.py
 
 
 Please take into account that the model was trained on mid-upper body selfies, with only one person in the picture and relatively near from the camera.
