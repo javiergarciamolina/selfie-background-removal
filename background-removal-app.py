@@ -177,7 +177,8 @@ def main():
       image = correct_orientation(image)
    
       image = np.array(image) / 255
-      image = np.expand_dims(image, axis=0)
+      #image = np.expand_dims(image, axis=0)
+      
 	
     if st.button("Process"):
                     
