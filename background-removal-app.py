@@ -182,8 +182,8 @@ def main():
 	
     if st.button("Process"):
                     
-      pred = unet.predict(image)[0]
-      
+#       pred = unet.predict(image)[0]
+      pred = unet.predict(image)
       mask = 1-((1-image)*pred)
       mask = array_to_img(mask[0])
       mask = mask.resize(final_shape)
