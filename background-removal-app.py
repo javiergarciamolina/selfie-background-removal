@@ -174,9 +174,10 @@ def main():
       final_shape = get_final_shape(orig_image)
 
       image = orig_image.resize((224,224))
+      image = np.array(image)
       image = correct_orientation(image)
 #       image = image.resize((224,224))
-      print(image)
+#       print(image)
    
       image = np.array(image) / 255
       image = np.expand_dims(image, axis=0)
@@ -184,7 +185,7 @@ def main():
 	
     if st.button("Process"):
       print(image)
-#       pred = unet.predict(image)[0]
+      pred = unet.predict(image)[0]
 #       pred = unet.predict(image)
 #       mask = 1-((1-image)*pred)
 #       mask = array_to_img(mask[0])
