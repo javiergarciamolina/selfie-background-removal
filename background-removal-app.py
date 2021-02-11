@@ -95,7 +95,7 @@ def is_correctly_oriented(image):
     
     # returns the estimated probability that the given image has correct orientation
     # assumes that the image has shape of (224,224,3)
-    image = img_to_array(image)[:,:,:-1]
+    image = img_to_array(image)[:,:,:3]
     
     # preprocessing function of MobileNetV2
     preprocessed_image = mobilenet_v2.preprocess_input(image)
