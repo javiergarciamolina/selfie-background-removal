@@ -56,7 +56,6 @@ After deploying the web app, I saw that sometimes the server would randomly rota
 
 **So I built a deep learning model that would tell whether an image is correctly oriented, and an algorithm that would rotate it to its correct orientation.**
 
-
 ## Visualizing some results:
 
 Let's see some examples of test images plotted against their ground-truth (or at least the one provided in the dataset) and their predictions:
