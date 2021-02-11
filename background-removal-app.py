@@ -175,7 +175,8 @@ def main():
 
       image = orig_image.resize((224,224))
       image = correct_orientation(image)
-      image = image.resize((224,224))
+#       image = image.resize((224,224))
+      print(image)
    
       image = np.array(image) / 255
       image = np.expand_dims(image, axis=0)
